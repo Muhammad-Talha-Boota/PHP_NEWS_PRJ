@@ -3,6 +3,9 @@
 use LDAP\Result;
 
 include "header.php";
+if($_SESSION['u_role'] == 0){
+    header("Location: {$hostname}/admin/post.php");
+}
 
 if (isset($_POST['save'])) {
     include "config.php";

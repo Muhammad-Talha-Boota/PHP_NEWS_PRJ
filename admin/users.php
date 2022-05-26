@@ -2,7 +2,12 @@
 
 use LDAP\Result;
 
-include "header.php"; ?>
+include "header.php";
+if($_SESSION['u_role'] == 0){
+    header("Location: {$hostname}/admin/post.php");
+}
+
+?>
 <div id="admin-content">
     <div class="container">
         <div class="row">
@@ -17,7 +22,7 @@ include "header.php"; ?>
                 <?php
                 include "config.php";
                 // start code for pagenation
-                $limit = 3;
+                $limit = 5;
                 if(isset($_GET['page'])){
                     $page = $_GET['page'];
                 }else{
@@ -26,7 +31,7 @@ include "header.php"; ?>
                 $offset = ($page - 1) * $limit;
                 // End Code for pagination and set LIMIT in Query that carry all data. 
 
-                $sql = "SELECT * FROM user ORDER BY user_id ASC LIMIT {$offset},{$limit}";
+                $sql = "SELECT * FROM user ORDER BY user_id DESC LIMIT {$offset},{$limit}";
                 $result = mysqli_query($conn, $sql) or die('Query Faild.');
                 if (mysqli_num_rows($result) > 0) {
 

@@ -1,3 +1,15 @@
+<?php
+include "config.php";
+
+session_start();
+
+if(isset($_SESSION['u_name'])){
+    header("Location: {$hostname}/admin/post.php");
+}
+
+
+?>
+
 <!doctype html>
 <html>
    <head>
@@ -18,7 +30,7 @@
                         <img class="logo" src="images/news.jpg">
                         <h3 class="heading">Admin</h3>
                         <!-- Form Start -->
-                        <form  action="" method ="POST">
+                        <form  action="<?php $_SERVER['PHP_SELF']; ?>" method ="POST">
                             <div class="form-group">
                                 <label>Username</label>
                                 <input type="text" name="username" class="form-control" placeholder="" required>
@@ -30,6 +42,36 @@
                             <input type="submit" name="login" class="btn btn-primary" value="login" />
                         </form>
                         <!-- /Form  End -->
+
+                        <!-- start code for login  -->
+                        <?php
+                        if(isset($_POST['login'])){
+                            include "config.php";
+                            $u_name = mysqli_real_escape_string($conn,$_POST['username']);
+                            $u_pass = mysqli_real_escape_string($conn,md5($_POST['password']));
+
+                            $sql = "SELECT user_id, username, role FROM user WHERE username = '{$u_name}' AND password = '{$u_pass}'";
+                            $result = mysqli_query($conn,$sql) or die("Query Faild");
+                            if(mysqli_num_rows($result) > 0){
+                                while($row = mysqli_fetch_assoc($result)){
+                                    session_start();
+                                    $_SESSION['u_id'] = $row['user_id'];
+                                    $_SESSION['u_name'] = $row['username'];
+                                    $_SESSION['u_role'] = $row['role'];
+
+                                    header("Location: {$hostname}/admin/post.php");
+                                }
+
+                            }else{
+                                echo "<div class='alert alert-danger'>Username or Password Not Match.</div>";
+                            }
+                        }
+                        // end code for login
+
+                        
+                        ?>
+            
+
                     </div>
                 </div>
             </div>
