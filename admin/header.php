@@ -41,7 +41,7 @@ if (!isset($_SESSION['u_name'])) {
                 <!-- /LOGO -->
                 <!-- LOGO-Out -->
                 <div class="col-md-offset-6  col-md-4">
-                    <a href="logout.php" class="admin-logout">Hello MHD-<?php echo $_SESSION['u_name']?>  logout</a>
+                    <a href="logout.php" class="admin-logout">Hello Mr-<?php echo $_SESSION['u_name']?>  logout</a>
                 </div>
                 <!-- /LOGO-Out -->
             </div>
