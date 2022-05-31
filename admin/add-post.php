@@ -29,10 +29,6 @@
                                       echo "<option value='{$row['category_id']}' >{$row['category_name']}</option>";
                                   }
                               }
-
-
-
-
                               ?>
                           </select>
                       </div>
