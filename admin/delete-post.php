@@ -13,9 +13,9 @@ unlink("upload/".$row['post_img']);
 
 
 $sql = "DELETE FROM post WHERE post_id = {$p_id};";
-// $sql .= "UPDATE category SET post = post - 1 WHERE category_id = {$c_id}";
-// if(mysqli_multi_query($conn,$sql)){
-if(mysqli_query($conn,$sql)){
+$sql .= "UPDATE category SET post = post - 1 WHERE category_id = {$c_id}";
+if(mysqli_multi_query($conn,$sql)){
+// if(mysqli_query($conn,$sql)){
     header("Location: {$hostname}/admin/post.php");
 }else{
     echo "Query Faild.";

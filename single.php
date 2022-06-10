@@ -20,18 +20,18 @@
                                 <div class="post-information">
                                     <span>
                                         <i class="fa fa-tags" aria-hidden="true"></i>
-                                        <?php echo $row['category_name'] ?>
+                                        <a href="category.php?cid=<?php echo $row['category_id'] ?>"><?php echo $row['category_name'] ?></a>
                                     </span>
                                     <span>
                                         <i class="fa fa-user" aria-hidden="true"></i>
-                                        <a href='author.php'><?php echo $row['username'] ?></a>
+                                        <a href="author.php?aid=<?php echo $row['author']; ?>"><?php echo $row['username'] ?></a>
                                     </span>
                                     <span>
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                         <?php echo $row['post_date'] ?>
                                     </span>
                                 </div>
-                                <img class="single-feature-image" src="admin/upload/<?php echo $row['post_img'] ?>" alt="" />
+                                <img height="400px" class="single-feature-image" src="admin/upload/<?php echo $row['post_img'] ?>" alt="" />
                                 <p class="description">
                                     <?php echo $row['description'] ?>
                                 </p>

@@ -40,9 +40,9 @@ $date = date("d M, Y");
 $author = $_SESSION['u_id'];
 
 $sql = "INSERT INTO post(title,description,category,post_date,author,post_img) VALUES('{$p_tittle}','{$p_desc}',{$p_cat},'{$date}',{$author},'{$file_name}');";
-// $sql .= "UPDATE category SET post = post + 1 WHERE category_id = {$p_cat}";
+$sql .= "UPDATE category SET post = post + 1 WHERE category_id = {$p_cat}";
+if(mysqli_multi_query($conn,$sql)){
 // if(mysqli_multi_query($conn,$sql)){
-if(mysqli_query($conn,$sql)){
     header("Location: {$hostname}/admin/post.php");
 }else{
     echo "<div class='alert alert-danger'>Query Failed.</div>";
