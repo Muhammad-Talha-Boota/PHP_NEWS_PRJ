@@ -47,7 +47,3 @@ if(mysqli_multi_query($conn,$sql)){
 }else{
     echo "<div class='alert alert-danger'>Query Failed.</div>";
 }
-
-
-
-?>
