@@ -11,7 +11,7 @@
               <div class="col-md-12">
               <?php
                 include "config.php";
-                // start code for pagenation
+                // start code for pagenationz
                 $limit = 5;
                 if(isset($_GET['page'])){
                     $page = $_GET['page'];
@@ -55,7 +55,7 @@
                       </thead>
                       <tbody>
                       <?php
-                            $i = 1;
+                            $i = $offset + 1;
                             while ($row = mysqli_fetch_assoc($result)) {
                             ?>
                           <tr>

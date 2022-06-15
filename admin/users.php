@@ -3,7 +3,7 @@
 use LDAP\Result;
 
 include "header.php";
-if($_SESSION['u_role'] == 0){
+if ($_SESSION['u_role'] == 0) {
     header("Location: {$hostname}/admin/post.php");
 }
 
@@ -23,9 +23,9 @@ if($_SESSION['u_role'] == 0){
                 include "config.php";
                 // start code for pagenation
                 $limit = 5;
-                if(isset($_GET['page'])){
+                if (isset($_GET['page'])) {
                     $page = $_GET['page'];
-                }else{
+                } else {
                     $page = 1;
                 }
                 $offset = ($page - 1) * $limit;
@@ -51,7 +51,7 @@ if($_SESSION['u_role'] == 0){
                         </thead>
                         <tbody>
                             <?php
-                            $i = 1;
+                            $i = $offset + 1;
                             while ($row = mysqli_fetch_assoc($result)) {
                             ?>
                                 <tr>
@@ -62,7 +62,7 @@ if($_SESSION['u_role'] == 0){
                                     <td><?php
                                         if ($row['role'] == 1) {
                                             echo "Admin";
-                                        }else{
+                                        } else {
                                             echo "user";
                                         }
                                         ?>
@@ -82,30 +82,29 @@ if($_SESSION['u_role'] == 0){
                 }
                 // start Code for Pagination
                 $sql1 = "SELECT * FROM user";
-                $result1 = mysqli_query($conn,$sql1) or die('Query Faild');
-                if(mysqli_num_rows($result1)>0){
+                $result1 = mysqli_query($conn, $sql1) or die('Query Faild');
+                if (mysqli_num_rows($result1) > 0) {
                     $total_record = mysqli_num_rows($result1);
                     $total_page = ceil($total_record / $limit);
 
                     echo "<ul class='pagination admin-pagination'>";
-                    if($page > 1 ){
-                        echo '<li><a href="users.php?page='.($page - 1).'" >Prev</a></li>';
+                    if ($page > 1) {
+                        echo '<li><a href="users.php?page=' . ($page - 1) . '" >Prev</a></li>';
                     }
-                    
-                    for($i=1; $i <= $total_page; $i++){
-                        if($i == $page){
+
+                    for ($i = 1; $i <= $total_page; $i++) {
+                        if ($i == $page) {
                             $active = "active";
-                        }else{
+                        } else {
                             $active = "";
                         }
-                        echo '<li class="' . $active . '"><a href="users.php?page='.$i.'"> '.$i.' </a></li>';
+                        echo '<li class="' . $active . '"><a href="users.php?page=' . $i . '"> ' . $i . ' </a></li>';
                     }
-                    if($total_page > $page){
-                        echo '<li><a href="users.php?page='.($page + 1).'" >Next</a></li>';
+                    if ($total_page > $page) {
+                        echo '<li><a href="users.php?page=' . ($page + 1) . '" >Next</a></li>';
                     }
-                    
-                    echo "</ul>";
 
+                    echo "</ul>";
                 }
                 // End Code for Pagination
                 ?>

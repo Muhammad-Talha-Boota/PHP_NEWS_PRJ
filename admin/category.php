@@ -41,7 +41,7 @@ if($_SESSION['u_role'] == 0){
                         </thead>
                         <tbody>
                             <?php
-                            $i = 1;
+                            $i = $offset + 1;
                             while ($row = mysqli_fetch_assoc($result)) 
                             {
                                 // for Number of post

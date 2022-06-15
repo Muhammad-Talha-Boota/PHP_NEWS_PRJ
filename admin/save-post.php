@@ -20,9 +20,12 @@ if(isset($_FILES['fileToUpload'])){
     {
         $errors[] = "File Size must be 2MB or lower.";
     }
+    $new_name = time() . "-" . basename($file_name);
+    $target = "upload/".$new_name;
+    $image_name = $new_name;
 
     if(empty($errors) == true){
-        move_uploaded_file($file_tmp,"upload/".$file_name);
+        move_uploaded_file($file_tmp,$target);
     }else{
         print_r($errors);
         die();
@@ -39,7 +42,7 @@ $p_cat = mysqli_real_escape_string($conn, $_POST['category']);
 $date = date("d M, Y");
 $author = $_SESSION['u_id'];
 
-$sql = "INSERT INTO post(title,description,category,post_date,author,post_img) VALUES('{$p_tittle}','{$p_desc}',{$p_cat},'{$date}',{$author},'{$file_name}');";
+$sql = "INSERT INTO post(title,description,category,post_date,author,post_img) VALUES('{$p_tittle}','{$p_desc}',{$p_cat},'{$date}',{$author},'{$image_name}');";
 $sql .= "UPDATE category SET post = post + 1 WHERE category_id = {$p_cat}";
 if(mysqli_multi_query($conn,$sql)){
 // if(mysqli_multi_query($conn,$sql)){

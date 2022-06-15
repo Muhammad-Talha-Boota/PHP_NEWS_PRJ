@@ -1,4 +1,25 @@
-<?php include "header.php"; ?>
+<?php include "header.php";
+
+if ($_SESSION['u_role'] == 0) {
+    include "config.php";
+    $p_id = $_GET['id'];
+    $sql2 = "SELECT author FROM post WHERE post_id = {$p_id}";
+    $result2 = mysqli_query($conn, $sql2);
+    $row2 = mysqli_fetch_assoc($result2);
+
+    if ($row2['author'] != $_SESSION['u_id']) {
+        header("Location: {$hostname}/admin/post.php");
+    }
+}
+
+
+
+?>
+
+
+
+
+
 <div id="admin-content">
     <div class="container">
         <div class="row">
@@ -47,9 +68,9 @@
                                     $result1 = mysqli_query($conn, $sql1) or die('Query Faild');
                                     if (mysqli_num_rows($result1) > 0) {
                                         while ($row1 = mysqli_fetch_assoc($result1)) {
-                                            if($row['category'] == $row1['category_id']){
+                                            if ($row['category'] == $row1['category_id']) {
                                                 $selected = "selected";
-                                            }else{
+                                            } else {
                                                 $selected = "";
                                             }
                                             echo "<option {$selected} value='{$row1['category_id']}' >{$row1['category_name']}</option>";
@@ -57,6 +78,7 @@
                                     }
                                     ?>
                                 </select>
+                                <input type="hidden" name="old_category" value="<?php echo $row['category']; ?>">
                             </div>
                             <div class="form-group">
                                 <label for="">Post image</label>
